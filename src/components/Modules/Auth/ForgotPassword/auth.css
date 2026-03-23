@@ -1,0 +1,190 @@
+@import '../../../../Index.css';
+
+/* ============ Login Page ============= */
+.log-reg-info-lt h3 {
+  font-size: 40px;
+  color: #fff;
+}
+
+.log-Reg-Wrap {
+  background: var(--clr-white);
+}
+
+.log-Reg-Wrap .logoReg-Bg {
+  background: url(../assets/images/log-bg.jpg) no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.log-Reg-Wrap .logoReg-Bg .log-reg-lt {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+}
+
+.log-Reg-Wrap .logoReg-Bg .log-reg-lt .log-reg-info-lt {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.log-Reg-Wrap .logoReg-Bg .log-reg-lt .log-reg-info-lt h3 {
+  color: var(--clr-white);
+}
+
+.log-Reg-Wrap .logoReg-Bg .log-reg-lt .log-reg-info-lt .text-logo {
+  margin: 0 0 40px;
+}
+
+.log-Reg-Wrap .logoReg-Bg .log-reg-lt .log-reg-info-lt .text-logo img {
+  margin: auto;
+}
+
+.log-Reg-Wrap .logoReg-Bg .log-reg-lt .log-reg-info-lt p {
+  color: var(--clr-white);
+}
+
+.logright-content .log-copyrht {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+}
+
+.log-Reg-Right {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.logright-content {
+  position: relative;
+  padding-bottom: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.log-Reg-Right .logo-log-Reg {
+  margin: 0 auto 60px;
+  max-width: 410px;
+}
+
+.log-Reg-Right .logo-log-Reg img {
+  margin: auto;
+}
+
+.log-Reg-Right .logo-log-Reg p {
+  color: var(--clr-accent-blue);
+  padding-top: 30px;
+}
+
+.log-Reg-Right .heading-block {
+  padding: 0 0 35px;
+}
+
+.log-Reg-Right .heading-block p {
+  color: var(--clr-gray);
+  font-size: var(--f-size-S);
+}
+
+.log-Reg-Right .form-main {
+  margin: 0 auto;
+  max-width: 590px;
+  text-align: left;
+}
+
+.log-Reg-Right .form-main .form-group .MuiFormControl-root {
+  width: 100%;
+}
+
+.log-Reg-Right .form-main .form-req-btm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 35px;
+}
+
+.form-group {
+  margin: 0 0 25px;
+}
+
+.log-copyrht {
+  padding: 0 15px;
+  text-align: center;
+}
+
+/* ============ Reset Password Page ============= */
+
+.reset-pass-Wrap {
+  min-height: 100vh;
+  background: url(../assets/images/bg-reset-pass.jpg) no-repeat;
+  background-size: cover;
+  padding: 90px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reset-card {
+  background: var(--clr-white);
+  box-shadow: 0px 0px 20px 0px #c5eff982;
+  border-radius: 30px;
+  padding: 80px 50px;
+  margin: 0 auto;
+  max-width: 590px;
+  text-align: center;
+}
+
+.reset-card .icon-box {
+  background: #edfeff;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0 auto 55px;
+}
+
+.reset-card .icon-box:after {
+  content: '';
+  border: 1px solid #05a0bf;
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  bottom: -7px;
+  left: -7px;
+  border-radius: 50%;
+}
+
+.forgot-wrap {
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.forgot-wrap .form-group.mb-5 {
+  margin-bottom: 0;
+}
+
+.reset-card.school-profile-wrap {
+  max-width: 1200px;
+}
+
+.form-main .right-wrap a {
+  font-weight: 700;
+  text-decoration: underline;
+  color: #0567a6;
+}
+
+.log-copyrht a {
+  color: #05a0bf;
+}
+
+.profile-setup-wrap {
+  background: url(../assets/images/school-profile-setup-bg.jpg) no-repeat;
+  background-size: cover !important;
+}

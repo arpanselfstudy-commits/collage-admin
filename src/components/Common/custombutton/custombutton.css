@@ -1,0 +1,195 @@
+button.full-btn {
+  width: 100%;
+  position: relative;
+}
+button.full-btn span.btn-icon {
+  position: absolute;
+  right: 10px;
+}
+/*---------- Solid Button Style ----------*/
+.MuiButtonBase-root.btn {
+  font-size: 16px;
+  text-transform: none;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 6px;
+  padding-left: 30px;
+  border-radius: 50px;
+  overflow: hidden;
+  border: 2px solid var(--primary-color);
+  min-height: 56px;
+}
+.MuiButtonBase-root.btn label {
+  margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+  transition: var(--common-transition);
+  pointer-events: none;
+}
+.MuiButtonBase-root.btn:hover {
+  color: var(--primary-color);
+}
+
+.btn .btn-icon {
+  width: 40px;
+  height: 40px;
+  background-color: var(--white-color);
+  border-radius: 50%;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-left: 25px;
+  position: relative;
+}
+.btn .btn-icon::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--white-color);
+  transition: 500ms ease;
+  border-radius: 50%;
+}
+.btn .btn-icon svg {
+  position: relative;
+  z-index: 1;
+}
+.btn:hover .btn-icon::before {
+  transform: scale(40);
+}
+
+.btn.Mui-disabled {
+  filter: grayscale(1);
+  color: unset !important;
+  opacity: 0.7;
+}
+/*---------- Solid Button Style ----------*/
+
+/*---------- Other Buttons Style ----------*/
+.MuiButtonBase-root.btn-outlined {
+  background-color: var(--white-color);
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+.MuiButtonBase-root.btn-outlined:hover {
+  background-color: var(--secondary-color);
+  transition-delay: 100ms;
+}
+.MuiButtonBase-root.btn-outlined:hover label {
+  color: var(--white-color);
+}
+
+.btn-outlined .btn-icon {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+}
+.btn-outlined .btn-icon::before {
+  background-color: var(--secondary-color);
+}
+
+.MuiButtonBase-root.btn-transparent {
+  background-color: transparent;
+  color: var(--white-color);
+  border-color: var(--white-color);
+}
+
+.MuiButtonBase-root.btn-gray-outlined {
+  border-color: var(--muted-color-dark);
+  color: var(--muted-color-dark);
+  background-color: var(--white-color);
+}
+.MuiButtonBase-root.btn-gray-outlined .btn-icon {
+  color: var(--white-color);
+}
+.MuiButtonBase-root.btn-gray-outlined .btn-icon::before {
+  background-color: var(--muted-color-dark);
+}
+.MuiButtonBase-root.btn-gray-outlined:hover {
+  background-color: var(--muted-color-dark);
+  color: var(--white-color);
+}
+.MuiButtonBase-root.btn-gray-outlined:hover .btn-icon {
+  color: var(--white-color);
+}
+
+.MuiButtonBase-root.btn-gray-solid {
+  background-color: var(--muted-color-dark);
+  border-color: var(--muted-color-dark);
+}
+.MuiButtonBase-root.btn-gray-solid:hover {
+  color: var(--muted-color-dark);
+}
+.MuiButtonBase-root.btn-gray-solid .btn-icon {
+  color: var(--muted-color-dark);
+}
+/*---------- Other Buttons Style ----------*/
+
+/*---------- Simple Button Style ----------*/
+.MuiButtonBase-root.btn-simple {
+  flex-direction: row-reverse;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.MuiButtonBase-root.btn-simple .btn-icon {
+  background-color: transparent;
+  color: var(--white-color);
+  width: auto;
+  height: auto;
+  margin-left: 0;
+  margin-right: 10px;
+  transition: var(--common-transition);
+}
+.MuiButtonBase-root.btn-simple .btn-icon::before {
+  display: none;
+}
+.MuiButtonBase-root.btn-simple:hover {
+  background-color: var(--white-color);
+}
+.MuiButtonBase-root.btn-simple:hover .btn-icon {
+  color: var(--primary-color);
+}
+
+.MuiButtonBase-root.btn-simple.ss-filter-btn {
+  border-color: var(--muted-color-dark);
+  color: var(--muted-color-dark);
+  min-width: 167px;
+  border-width: 1px;
+  background-color: var(--white-color);
+  font-size: 18px;
+  font-weight: 300;
+}
+.MuiButtonBase-root.btn-simple.ss-filter-btn .btn-icon {
+  color: var(--muted-color-dark);
+  transition: var(--common-transition);
+}
+.MuiButtonBase-root.btn-simple.ss-filter-btn:hover {
+  background-color: var(--muted-color-dark);
+  color: var(--white-color);
+}
+.MuiButtonBase-root.btn-simple.ss-filter-btn:hover .btn-icon {
+  color: var(--white-color);
+}
+.MuiButtonBase-root.btn-simple.ss-filter-btn svg {
+  font-size: 24px;
+}
+/*---------- Simple Button Style ----------*/
+
+/*---------- No Icon Button Style ----------*/
+.MuiButtonBase-root.no-icon {
+  padding-right: 30px;
+}
+.MuiButtonBase-root.no-icon:hover {
+  background-color: var(--white-color);
+}
+.MuiButtonBase-root.no-icon .btn-icon {
+  display: none;
+}
+
+.MuiButtonBase-root.btn-outlined.no-icon:hover {
+  background-color: var(--secondary-color);
+}
+/*---------- No Icon Button Style ----------*/

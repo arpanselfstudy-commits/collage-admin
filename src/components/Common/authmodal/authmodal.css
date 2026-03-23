@@ -1,0 +1,96 @@
+/* Auth modal css  */
+.authmodal .MuiDialog-paper {
+  width: 100%;
+  max-width: 610px;
+  border-radius: 50px;
+  padding-top: 80px;
+  padding-bottom: 10%;
+  text-align: center;
+  position: relative;
+}
+.authmodal-section {
+  position: relative;
+  z-index: 4;
+}
+.authmodal .MuiDialog-paper:after {
+  position: absolute;
+  content: '';
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 200px;
+  background: url('../../assets/images/soumya-images/modal-bg-bottom.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 3;
+}
+.authmodal .MuiDialog-paper:before {
+  position: absolute;
+  content: '';
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: url(/assets/images/soumya-images/modal-bg.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: unset;
+  margin: auto;
+  z-index: 1;
+}
+.authmodal .icon-box {
+  background: #edfeff;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0 auto 55px;
+}
+.authmodal .icon-box:after {
+  content: '';
+  border: 1px solid #05a0bf;
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  bottom: -7px;
+  left: -7px;
+  border-radius: 50%;
+}
+.authmodal .highlight {
+  font-size: var(--f-size-S);
+  color: var(--clr-accent-blue);
+  margin-bottom: 20px;
+}
+.authmodal p {
+  max-width: 420px;
+  margin: auto;
+  color: var(--clr-gray);
+}
+.authmodal .button-holder {
+  margin-top: 40px;
+}
+.authmodal .close-icon {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  cursor: pointer;
+  z-index: 5;
+}
+.authmodal .button-holder {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.authmodal .button-holder button.btn {
+  min-width: 175px;
+}
+/* Auth modal css  */
