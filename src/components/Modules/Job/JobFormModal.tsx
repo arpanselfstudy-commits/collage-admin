@@ -1,7 +1,7 @@
-import { useRef } from "react";
 import { Dialog, DialogContent } from "@mui/material";
 import { IoAddOutline, IoTrashOutline, IoCloseOutline } from "react-icons/io5";
 import FormField from "../../Common/form/FormField";
+import DatePickerField from "../../Common/DatePickerField/DatePickerField";
 import CustomButton from "../../Common/custombutton/CustomButton";
 import useJobForm from "./useJobForm";
 import { Job } from "../../../types/jobTypes";
@@ -24,7 +24,7 @@ const JobFormModal = ({ open, onClose, onSaved, editJob }: JobFormModalProps) =>
     onClose();
   }, editJob);
 
-  const { register, formState: { errors } } = formMethods;
+  const { register, formState: { errors }, watch, setValue } = formMethods;
   const { fields, append, remove } = responsibilitiesField;
 
   // Prevent the native date picker calendar from bubbling clicks to the Dialog backdrop
@@ -119,9 +119,14 @@ const JobFormModal = ({ open, onClose, onSaved, editJob }: JobFormModalProps) =>
               {errors.type && <div className="text-red-500 text-sm mt-1">{errors.type.message}</div>}
             </div>
 
-            {/* Date input */}
-            <FormField label="Deadline" name="deadline" type="date" required
-              register={register("deadline")} error={errors.deadline?.message} />
+            {/* Date picker */}
+            <DatePickerField
+              label="Deadline"
+              required
+              value={watch("deadline") || ""}
+              onChange={(val) => setValue("deadline", val, { shouldValidate: true })}
+              error={errors.deadline?.message}
+            />
           </div>
 
           {/* Row 3 */}

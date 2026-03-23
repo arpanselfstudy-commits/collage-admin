@@ -3,11 +3,16 @@ import React, { useState } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
 interface FormFieldProps {
   label: string;
   name: string;
-  type?: 'text' | 'email' | 'password' | 'textarea' | 'date';
-  rows?: number; // For textarea
+  type?: 'text' | 'email' | 'password' | 'textarea' | 'date' | 'select';
+  rows?: number;
   placeholder?: string;
   className?: string;
   required?: boolean;
@@ -16,6 +21,7 @@ interface FormFieldProps {
   register: UseFormRegisterReturn;
   error?: string;
   onInput?: React.FormEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  options?: SelectOption[];
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -31,6 +37,7 @@ const FormField: React.FC<FormFieldProps> = ({
   error,
   onInput,
   rows = 4,
+  options = [],
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -70,6 +77,20 @@ const FormField: React.FC<FormFieldProps> = ({
           rows={rows}
           className="form-control w-full p-2 border rounded"
         />
+      );
+    } else if (type === 'select') {
+      return (
+        <select
+          id={name}
+          {...register}
+          disabled={disabled}
+          className="form-control w-full"
+        >
+          {placeholder && <option value="">{placeholder}</option>}
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
       );
     } else {
       return (

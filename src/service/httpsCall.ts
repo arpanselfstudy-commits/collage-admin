@@ -1,4 +1,5 @@
 import axios from "axios";
+import { emitLogout } from "./authEvents";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -11,9 +12,6 @@ axios.interceptors.request.use(async (config) => {
   return config;
 });
 
-/** *
- * *axios response configs
- */
 axios.interceptors.response.use(
   (response) => {
     return response.data;
@@ -21,13 +19,16 @@ axios.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry && !originalRequest.url?.includes("/auth/refresh")) {
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url?.includes("/auth/refresh")
+    ) {
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem("refreshToken");
 
       if (refreshToken) {
         try {
-          // Use global axios for the refresh call to avoid the interceptor that returns .data
           const response = await axios.post(`${baseURL}/auth/refresh`, {
             refreshToken,
           });
@@ -42,14 +43,14 @@ axios.interceptors.response.use(
 
             return axios(originalRequest);
           }
-        } catch (refreshError) {
+        } catch {
           localStorage.clear();
-          window.location.href = "/login";
-          return Promise.reject(refreshError);
+          emitLogout();
+          return Promise.reject(error);
         }
       } else {
         localStorage.clear();
-        window.location.href = "/login";
+        emitLogout();
       }
     }
 

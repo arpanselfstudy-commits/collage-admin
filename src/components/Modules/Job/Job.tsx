@@ -109,11 +109,11 @@ const Job = () => {
 
   return (
     <div className="dashboardholder">
-      <div className="dashboard-sub-title pt-[30px]">
+      {/* <div className="dashboard-sub-title pt-[30px]">
         <h5>Job Management</h5>
-      </div>
+      </div> */}
 
-      <div className="dashboard-title">
+      <div className="dashboard-title pt-[10px]">
         <h2>Jobs</h2>
         <CustomButton
           label="Create Job"
@@ -129,9 +129,7 @@ const Job = () => {
           placeholder="Search by job name, location..."
           onSearch={handleSearch}
         />
-        <span style={{ fontSize: "13px", color: "var(--muted-color)" }}>
-          {pagination.total} job{pagination.total !== 1 ? "s" : ""} found
-        </span>
+       
       </div>
 
       <DataTable<JobType>

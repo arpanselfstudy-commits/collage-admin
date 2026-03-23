@@ -27,6 +27,13 @@ const Sidebar = ({ isSidebarToggled, toggleSidebar }: SidebarProps) => {
     navigate("/login");
   };
 
+  // Close sidebar on mobile when a nav link is clicked
+  const handleNavClick = () => {
+    if (window.innerWidth < 1200) {
+      toggleSidebar();
+    }
+  };
+
   return (
     <>
       <aside className="sidebar">
@@ -41,6 +48,7 @@ const Sidebar = ({ isSidebarToggled, toggleSidebar }: SidebarProps) => {
               <NavLink
                 to="/dashboard"
                 end
+                onClick={handleNavClick}
                 className={({ isActive }) => `rounded-[10px] flex ${isActive ? 'active' : ''}`}
               >
                 <span><img src={dashboardicon} alt="icon" /></span>
@@ -51,6 +59,7 @@ const Sidebar = ({ isSidebarToggled, toggleSidebar }: SidebarProps) => {
               <NavLink
                 to="/shop-management"
                 end
+                onClick={handleNavClick}
                 className={({ isActive }) => `rounded-[10px] flex ${isActive ? 'active' : ''}`}
               >
                 <span><FaShopify size={24} /></span>
@@ -61,6 +70,7 @@ const Sidebar = ({ isSidebarToggled, toggleSidebar }: SidebarProps) => {
               <NavLink
                 to="/job-management"
                 end
+                onClick={handleNavClick}
                 className={({ isActive }) => `rounded-[10px] flex ${isActive ? 'active' : ''}`}
               >
                 <span><MdWork size={24} /></span>
@@ -71,6 +81,7 @@ const Sidebar = ({ isSidebarToggled, toggleSidebar }: SidebarProps) => {
               <NavLink
                 to="/cms"
                 end
+                onClick={handleNavClick}
                 className={({ isActive }) => `rounded-[10px] flex ${isActive ? 'active' : ''}`}
               >
                 <span><MdOutlineContentPaste size={24} /></span>

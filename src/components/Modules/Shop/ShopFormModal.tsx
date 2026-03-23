@@ -1,6 +1,7 @@
 import { Dialog, DialogContent } from "@mui/material";
 import { IoAddOutline, IoCloseOutline, IoTrashOutline } from "react-icons/io5";
 import FormField from "../../Common/form/FormField";
+import DatePickerField from "../../Common/DatePickerField/DatePickerField";
 import CustomButton from "../../Common/custombutton/CustomButton";
 import useShopForm from "./useShopForm";
 import { Shop } from "../../../types/shopTypes";
@@ -149,20 +150,20 @@ const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps)
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="form-group mb-5">
-                    <label className="block font-semibold mb-1 label-colr">Start Date <span className="mandatory-icon">*</span></label>
-                    <input type="date" {...register(`offers.${index}.startDate`)} className="form-control w-full" style={{ paddingRight: "16px" }} />
-                    {(errors.offers as any)?.[index]?.startDate && (
-                      <div className="text-red-500 text-sm mt-1">{(errors.offers as any)[index].startDate.message}</div>
-                    )}
-                  </div>
-                  <div className="form-group mb-5">
-                    <label className="block font-semibold mb-1 label-colr">End Date <span className="mandatory-icon">*</span></label>
-                    <input type="date" {...register(`offers.${index}.endDate`)} className="form-control w-full" style={{ paddingRight: "16px" }} />
-                    {(errors.offers as any)?.[index]?.endDate && (
-                      <div className="text-red-500 text-sm mt-1">{(errors.offers as any)[index].endDate.message}</div>
-                    )}
-                  </div>
+                  <DatePickerField
+                    label="Start Date"
+                    required
+                    value={watch(`offers.${index}.startDate`) || ""}
+                    onChange={(val) => setValue(`offers.${index}.startDate`, val, { shouldValidate: true })}
+                    error={(errors.offers as any)?.[index]?.startDate?.message}
+                  />
+                  <DatePickerField
+                    label="End Date"
+                    required
+                    value={watch(`offers.${index}.endDate`) || ""}
+                    onChange={(val) => setValue(`offers.${index}.endDate`, val, { shouldValidate: true })}
+                    error={(errors.offers as any)?.[index]?.endDate?.message}
+                  />
                 </div>
 
                 <FormField label="Description" name={`offers.${index}.description`} type="textarea" rows={2}

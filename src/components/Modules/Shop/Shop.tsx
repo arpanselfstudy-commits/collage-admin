@@ -82,11 +82,11 @@ const Shop = () => {
 
   return (
     <div className="dashboardholder">
-      <div className="dashboard-sub-title pt-[30px]">
+      {/* <div className="dashboard-sub-title pt-[30px]">
         <h5>Shop Management</h5>
-      </div>
+      </div> */}
 
-      <div className="dashboard-title">
+      <div className="dashboard-title pt-[10px]">
         <h2>Shops</h2>
         <CustomButton
           label="Create Shop"
@@ -101,9 +101,6 @@ const Shop = () => {
           placeholder="Search by shop name, location..."
           onSearch={handleSearch}
         />
-        <span style={{ fontSize: "13px", color: "var(--muted-color)" }}>
-          {pagination.total} shop{pagination.total !== 1 ? "s" : ""} found
-        </span>
       </div>
 
       <DataTable<ShopType>
