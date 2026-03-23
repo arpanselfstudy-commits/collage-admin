@@ -6,6 +6,8 @@ const ProtectedRoute = () => {
   const isLoggedIn = useSelector((state: RootState) => state.authSlice.isLoggedIn);
   const token = localStorage.getItem("accessToken");
 
+  
+
   if (!isLoggedIn && !token) {
     return <Navigate to="/login" replace />;
   }

@@ -6,7 +6,7 @@ import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 interface FormFieldProps {
   label: string;
   name: string;
-  type?: 'text' | 'email' | 'password' | 'textarea';
+  type?: 'text' | 'email' | 'password' | 'textarea' | 'date';
   rows?: number; // For textarea
   placeholder?: string;
   className?: string;

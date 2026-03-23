@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { FaShopify } from 'react-icons/fa';
 import dashboardicon from '../../assets/images/icon-dashboard.svg';
-import { MdWork } from "react-icons/md";
-import { NavLink } from 'react-router-dom';
-import { MdOutlineContentPaste } from "react-icons/md";
+import { MdWork, MdOutlineContentPaste } from "react-icons/md";
 import { IoMdLogOut } from "react-icons/io";
-
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
+import { logout } from '../../store/auth.store';
+import ConfirmModal from '../Common/ConfirmModal/ConfirmModal';
 
 interface SidebarProps {
   isSidebarToggled: boolean;
@@ -12,6 +15,18 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isSidebarToggled, toggleSidebar }: SidebarProps) => {
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogoutConfirm = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    dispatch(logout());
+    toast.success("Logged out successfully");
+    navigate("/login");
+  };
+
   return (
     <>
       <aside className="sidebar">
@@ -28,9 +43,7 @@ const Sidebar = ({ isSidebarToggled, toggleSidebar }: SidebarProps) => {
                 end
                 className={({ isActive }) => `rounded-[10px] flex ${isActive ? 'active' : ''}`}
               >
-                <span>
-                  <img src={dashboardicon} alt="icon" />
-                </span>{' '}
+                <span><img src={dashboardicon} alt="icon" /></span>
                 Dashboard
               </NavLink>
             </li>
@@ -40,11 +53,7 @@ const Sidebar = ({ isSidebarToggled, toggleSidebar }: SidebarProps) => {
                 end
                 className={({ isActive }) => `rounded-[10px] flex ${isActive ? 'active' : ''}`}
               >
-                <span>
-                  {/* <img src={dashboardicon} alt="icon" /> */}
-                  <FaShopify size={24} />
-
-                </span>{' '}
+                <span><FaShopify size={24} /></span>
                 Shop Management
               </NavLink>
             </li>
@@ -54,11 +63,7 @@ const Sidebar = ({ isSidebarToggled, toggleSidebar }: SidebarProps) => {
                 end
                 className={({ isActive }) => `rounded-[10px] flex ${isActive ? 'active' : ''}`}
               >
-                <span>
-                  {/* <img src={dashboardicon} alt="icon" /> */}
-                  <MdWork size={24} />
-
-                </span>{' '}
+                <span><MdWork size={24} /></span>
                 Job Management
               </NavLink>
             </li>
@@ -68,32 +73,36 @@ const Sidebar = ({ isSidebarToggled, toggleSidebar }: SidebarProps) => {
                 end
                 className={({ isActive }) => `rounded-[10px] flex ${isActive ? 'active' : ''}`}
               >
-                <span>
-                  {/* <img src={dashboardicon} alt="icon" /> */}
-                  <MdOutlineContentPaste size={24} />
-
-                </span>{' '}
+                <span><MdOutlineContentPaste size={24} /></span>
                 CMS
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/login"
-                end
-                className={({ isActive }) => `rounded-[10px] flex ${isActive ? 'active' : ''}`}
+              <button
+                onClick={() => setShowLogoutModal(true)}
+                style={{ padding: '18px 20px', transition: 'var(--common-transition)', color: 'var(--white-color)', background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left' }}
+                className="rounded-[10px] flex items-center hover:bg-white hover:text-[var(--primary-color)] hover:font-semibold group"
               >
-                <span>
-                  {/* <img src={dashboardicon} alt="icon" /> */}
-                  <IoMdLogOut size={24} color='red' />
-
-                </span>{' '}
+                <span className="mr-[10px] group-hover:[filter:none]" style={{ filter: 'brightness(0) invert(1)' }}>
+                  <IoMdLogOut size={24} />
+                </span>
                 Logout
-              </NavLink>
+              </button>
             </li>
-
           </ul>
         </div>
       </aside>
+
+      <ConfirmModal
+        open={showLogoutModal}
+        title="Log out?"
+        description="Are you sure you want to log out of your account?"
+        confirmLabel="Log out"
+        cancelLabel="Cancel"
+        icon={<IoMdLogOut />}
+        onConfirm={handleLogoutConfirm}
+        onCancel={() => setShowLogoutModal(false)}
+      />
     </>
   );
 };
