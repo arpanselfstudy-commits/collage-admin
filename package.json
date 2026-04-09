@@ -61,7 +61,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "seed": "node scripts/seedData.js",
+    "seed:shops": "node scripts/seedData.js $TOKEN shops",
+    "seed:jobs": "node scripts/seedData.js $TOKEN jobs"
   },
   "browserslist": {
     "production": [
