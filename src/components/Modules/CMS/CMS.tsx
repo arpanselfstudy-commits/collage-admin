@@ -93,7 +93,7 @@ const CMS = () => {
         <h5>CMS Management</h5>
       </div>
 
-      <div className="dashboard-title">
+      {/* <div className="dashboard-title">
         <h2>Content Pages</h2>
         <CustomButton
           label="Create Content"
@@ -101,7 +101,7 @@ const CMS = () => {
           icon={<IoAddOutline size={16} />}
           onClick={openCreate}
         />
-      </div>
+      </div> */}
 
       <DataTable<CmsItem>
         columns={columns}

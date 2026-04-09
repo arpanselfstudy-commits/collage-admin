@@ -13,6 +13,9 @@ export interface ShopFormValues {
   distance: string;
   contactEmail: string;
   contactPhone: string;
+  photos: string[];
+  topItems: string[];
+  allItems: string[];
   shopTiming: {
     monday: DayTiming;
     tuesday: DayTiming;
@@ -45,6 +48,9 @@ const schema = Yup.object().shape({
   distance: Yup.string().trim(),
   contactEmail: Yup.string().trim().email("Enter a valid email").required("Contact email is required"),
   contactPhone: Yup.string().trim().required("Contact phone is required"),
+  photos: Yup.array().of(Yup.string().trim().url("Enter a valid URL")),
+  topItems: Yup.array().of(Yup.string().trim()),
+  allItems: Yup.array().of(Yup.string().trim()),
   shopTiming: Yup.object().shape({
     monday: dayTimingSchema,
     tuesday: dayTimingSchema,
@@ -75,6 +81,9 @@ const emptyDefaults: ShopFormValues = {
   distance: "",
   contactEmail: "",
   contactPhone: "",
+  photos: [],
+  topItems: [],
+  allItems: [],
   shopTiming: {
     monday: defaultDay,
     tuesday: defaultDay,
@@ -94,6 +103,9 @@ const shopToFormValues = (shop: Shop): ShopFormValues => ({
   distance: shop.distance || "",
   contactEmail: shop.contactDetails?.email || "",
   contactPhone: shop.contactDetails?.phoneNo || "",
+  photos: shop.photos || [],
+  topItems: shop.topItems || [],
+  allItems: shop.allItems || [],
   shopTiming: {
     monday: shop.shopTiming?.monday || defaultDay,
     tuesday: shop.shopTiming?.tuesday || defaultDay,
@@ -138,6 +150,9 @@ const useShopForm = (onSuccess: () => void, editShop?: Shop | null) => {
         type: data.type,
         location: data.location,
         distance: data.distance,
+        photos: data.photos,
+        topItems: data.topItems,
+        allItems: data.allItems,
         contactDetails: { email: data.contactEmail, phoneNo: data.contactPhone },
         shopTiming: data.shopTiming,
         offers: data.offers.map((o) => ({

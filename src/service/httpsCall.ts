@@ -33,7 +33,7 @@ axios.interceptors.response.use(
             refreshToken,
           });
 
-          if (response.status === 200 || response.status === 201) {
+          if (response.data.code === 200 || response.data.code === 201) {
             const { accessToken, refreshToken: newRefreshToken } = response.data.data;
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("refreshToken", newRefreshToken);

@@ -1,3 +1,4 @@
+import React from "react";
 import { Dialog, DialogContent } from "@mui/material";
 import { IoAddOutline, IoCloseOutline, IoTrashOutline } from "react-icons/io5";
 import FormField from "../../Common/form/FormField";
@@ -24,13 +25,48 @@ const sectionTitle = (text: string) => (
 );
 
 const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps) => {
-  const { formMethods, offersField, loading, isEdit, onSubmit } = useShopForm(() => {
+  const { formMethods, offersField, photosField, topItemsField, allItemsField, loading, isEdit, onSubmit } = useShopForm(() => {
     onSaved();
     onClose();
   }, editShop);
 
   const { register, watch, setValue, formState: { errors } } = formMethods;
   const { fields: offerFields, append: appendOffer, remove: removeOffer } = offersField;
+
+  const photos = watch("photos") || [];
+  const topItems = watch("topItems") || [];
+  const allItems = watch("allItems") || [];
+
+  const [topItemInput, setTopItemInput] = React.useState("");
+  const [allItemInput, setAllItemInput] = React.useState("");
+
+  const addToArray = (field: "photos" | "topItems" | "allItems", current: string[]) =>
+    setValue(field, [...current, ""], { shouldDirty: true });
+
+  const updateArrayItem = (field: "photos" | "topItems" | "allItems", current: string[], index: number, value: string) => {
+    const updated = [...current];
+    updated[index] = value;
+    setValue(field, updated, { shouldDirty: true });
+  };
+
+  const removeFromArray = (field: "photos" | "topItems" | "allItems", current: string[], index: number) =>
+    setValue(field, current.filter((_, i) => i !== index), { shouldDirty: true });
+
+  const handleAddTopItem = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && topItemInput.trim()) {
+      e.preventDefault();
+      setValue("topItems", [...topItems, topItemInput.trim()], { shouldDirty: true });
+      setTopItemInput("");
+    }
+  };
+
+  const handleAddAllItem = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && allItemInput.trim()) {
+      e.preventDefault();
+      setValue("allItems", [...allItems, allItemInput.trim()], { shouldDirty: true });
+      setAllItemInput("");
+    }
+  };
 
   return (
     <Dialog
@@ -84,6 +120,74 @@ const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps)
             <FormField label="Contact Phone" name="contactPhone" placeholder="+1 234 567 8900" required
               register={register("contactPhone")} error={errors.contactPhone?.message} />
           </div>
+
+          {/* ── Photos ── */}
+          {sectionTitle("Shop Photos")}
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "16px" }}>
+            {photos.map((_, index) => (
+              <div key={index} style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                <input
+                  value={photos[index]}
+                  onChange={(e) => updateArrayItem("photos", photos, index, e.target.value)}
+                  placeholder="https://example.com/photo.jpg"
+                  className="form-control"
+                  style={{ flex: 1, height: "38px", fontSize: "13px" }}
+                />
+                <button type="button" onClick={() => removeFromArray("photos", photos, index)}
+                  style={{ background: "#fff1f1", border: "1px solid #fca5a5", borderRadius: "6px", cursor: "pointer", color: "#e53e3e", display: "flex", alignItems: "center", justifyContent: "center", width: "34px", height: "34px", flexShrink: 0 }}>
+                  <IoTrashOutline size={15} />
+                </button>
+              </div>
+            ))}
+          </div>
+          <button type="button" onClick={() => addToArray("photos", photos)}
+            style={{ display: "inline-flex", alignItems: "center", gap: "4px", background: "var(--primary-color-light)", border: "1px solid var(--clr-accent-blue)", borderRadius: "8px", padding: "7px 14px", cursor: "pointer", color: "var(--clr-primary)", fontSize: "13px", fontWeight: 600, marginBottom: "24px" }}>
+            <IoAddOutline size={16} /> Add Photo URL
+          </button>
+
+          {/* ── Top Items ── */}
+          {sectionTitle("Top Items")}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "10px" }}>
+            {topItems.map((item, index) => (
+              <span key={index} style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "var(--primary-color-light)", border: "1px solid var(--clr-accent-blue)", borderRadius: "20px", padding: "5px 12px", fontSize: "13px", color: "var(--clr-primary)", fontWeight: 500 }}>
+                {item}
+                <button type="button" onClick={() => removeFromArray("topItems", topItems, index)}
+                  style={{ background: "none", border: "none", cursor: "pointer", color: "var(--clr-primary)", display: "flex", padding: 0, lineHeight: 1 }}>
+                  <IoCloseOutline size={15} />
+                </button>
+              </span>
+            ))}
+          </div>
+          <input
+            value={topItemInput}
+            onChange={(e) => setTopItemInput(e.target.value)}
+            onKeyDown={handleAddTopItem}
+            placeholder="Type item name and press Enter..."
+            className="form-control"
+            style={{ height: "38px", fontSize: "13px", marginBottom: "24px" }}
+          />
+
+          {/* ── All Items ── */}
+          {sectionTitle("All Items")}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "10px" }}>
+            {allItems.map((item, index) => (
+              <span key={index} style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "var(--primary-color-light)", border: "1px solid var(--clr-accent-blue)", borderRadius: "20px", padding: "5px 12px", fontSize: "13px", color: "var(--clr-primary)", fontWeight: 500 }}>
+                {item}
+                <button type="button" onClick={() => removeFromArray("allItems", allItems, index)}
+                  style={{ background: "none", border: "none", cursor: "pointer", color: "var(--clr-primary)", display: "flex", padding: 0, lineHeight: 1 }}>
+                  <IoCloseOutline size={15} />
+                </button>
+              </span>
+            ))}
+          </div>
+          <input
+            value={allItemInput}
+            onChange={(e) => setAllItemInput(e.target.value)}
+            onKeyDown={handleAddAllItem}
+            placeholder="Type item name and press Enter..."
+            className="form-control"
+            style={{ height: "38px", fontSize: "13px", marginBottom: "24px" }}
+          />
 
           {/* ── Shop Timing ── */}
           {sectionTitle("Shop Timing")}

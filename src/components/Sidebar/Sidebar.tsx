@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import { logout } from '../../store/auth.store';
 import ConfirmModal from '../Common/ConfirmModal/ConfirmModal';
+import AuthApi from '../../service/apis/Auth.api';
 
 interface SidebarProps {
   isSidebarToggled: boolean;
@@ -19,12 +20,20 @@ const Sidebar = ({ isSidebarToggled, toggleSidebar }: SidebarProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogoutConfirm = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    dispatch(logout());
-    toast.success("Logged out successfully");
-    navigate("/login");
+  const handleLogoutConfirm = async () => {
+
+    try {
+      const refreshToken = localStorage.getItem("refreshToken");
+      if (refreshToken) await AuthApi.logout({ refreshToken });
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      dispatch(logout());
+      toast.success("Logged out successfully");
+      navigate("/login");
+    } catch (error) {
+      toast.error("Some thing went wrong.");
+    }
+
   };
 
   // Close sidebar on mobile when a nav link is clicked
